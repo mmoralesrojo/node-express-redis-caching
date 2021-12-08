@@ -49,7 +49,7 @@ pipeline {
         stage('deploy') {
             steps {
                 script {
-                    gv.deployApp
+                    gv.deployApp()
                 }
                 //echo 'Deploying the application...'
                 //echo "Deploying version ${params.VERSION}"
