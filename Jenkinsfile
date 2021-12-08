@@ -34,7 +34,7 @@ pipeline {
         stage('deploy') {
             steps {
                 echo 'Deploying the application...'
-                scho "Deploying version ${params.VERSION}"
+                echo "Deploying version ${params.VERSION}"
                 /*echo "Deploying with ${SERVER_CREDENTIALS}"
                 sh ${SERVER_CREDENTIALS}*/
                 /*withCredentials([
