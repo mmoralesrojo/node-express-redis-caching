@@ -1,3 +1,5 @@
+def gv
+
 //CODE_CHANGES = getGitChanges()
 pipeline {
     agent any
@@ -10,6 +12,13 @@ pipeline {
         booleanParam(name: 'executeTest', defaultValue: true, description: '')
     }
     stages {
+        stage('init') {
+            steps {
+                script {
+                    gv = load "script.groovy"
+                }
+            }
+        }
         stage('build') {
             when {
                 expression {
@@ -17,8 +26,11 @@ pipeline {
                 }
             }
             steps {
-                echo 'Building the application...'
-                echo "Building version ${params.VERSION}"
+                //echo 'Building the application...'
+                //echo "Building version ${params.VERSION}"
+                script {
+                    gv.buildApp()
+                }
             }
         }
         stage('test') {
@@ -28,13 +40,19 @@ pipeline {
                 }
             }
             steps {
-                echo 'Testing the application...'
+                script {
+                    gv.testApp()
+                }
+                //echo 'Testing the application...'
             }
         }
         stage('deploy') {
             steps {
-                echo 'Deploying the application...'
-                echo "Deploying version ${params.VERSION}"
+                script {
+                    gv.deployApp
+                }
+                //echo 'Deploying the application...'
+                //echo "Deploying version ${params.VERSION}"
                 /*echo "Deploying with ${SERVER_CREDENTIALS}"
                 sh ${SERVER_CREDENTIALS}*/
                 /*withCredentials([
