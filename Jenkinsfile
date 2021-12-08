@@ -45,7 +45,7 @@ pipeline {
             }
         }
     }
-    post {
+    /*post {
         always {
             // e.g. Sending email
         }
@@ -55,5 +55,5 @@ pipeline {
         failure {
             // Only on failure
         }
-    }
+    }*/
 }
